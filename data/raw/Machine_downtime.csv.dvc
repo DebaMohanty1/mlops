@@ -1,0 +1,5 @@
+outs:
+- md5: d145b7eb04df19b470da495fb0ed21a7
+  size: 471770
+  hash: md5
+  path: Machine_downtime.csv
