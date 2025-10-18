@@ -200,5 +200,40 @@
         "drift_share": 0.769,
         "drifted_columns": 10,
         "total_columns": 16
+    },
+    {
+        "timestamp": "2025-10-19 04:59:59",
+        "dataset": "batch_1",
+        "drift_share": 0.308,
+        "drifted_columns": 4,
+        "total_columns": 16
+    },
+    {
+        "timestamp": "2025-10-19 05:01:38",
+        "dataset": "batch_1",
+        "drift_share": 0.308,
+        "drifted_columns": 4,
+        "total_columns": 16
+    },
+    {
+        "timestamp": "2025-10-19 05:01:54",
+        "dataset": "batch_1",
+        "drift_share": 0.0,
+        "drifted_columns": 0,
+        "total_columns": 16
+    },
+    {
+        "timestamp": "2025-10-19 05:01:57",
+        "dataset": "batch_2",
+        "drift_share": 0.231,
+        "drifted_columns": 3,
+        "total_columns": 16
+    },
+    {
+        "timestamp": "2025-10-19 05:02:02",
+        "dataset": "batch_3",
+        "drift_share": 0.769,
+        "drifted_columns": 10,
+        "total_columns": 16
     }
 ]
