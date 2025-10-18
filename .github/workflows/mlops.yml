@@ -1,0 +1,72 @@
+name: 🧠 Machine Downtime MLOps Pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+  schedule:
+    - cron: "0 3 * * *"  # Runs daily at 3 AM UTC (customize as needed)
+
+jobs:
+  drift-detect-train:
+    runs-on: ubuntu-latest
+    steps:
+      # ---------------------------
+      # 1️⃣ Checkout repo
+      # ---------------------------
+      - name: 📦 Checkout repository
+        uses: actions/checkout@v4
+
+      # ---------------------------
+      # 2️⃣ Setup Python
+      # ---------------------------
+      - name: 🐍 Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      # ---------------------------
+      # 3️⃣ Install dependencies
+      # ---------------------------
+      - name: ⚙️ Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt || pip install mlflow evidently scikit-learn imbalanced-learn python-dotenv joblib pandas numpy sqlalchemy pymysql
+
+      # ---------------------------
+      # 4️⃣ Run Drift Detection
+      # ---------------------------
+      - name: 🔍 Run drift detection
+        run: |
+          python src/detect_drift.py --source file
+
+      # ---------------------------
+      # 5️⃣ Retrain Model (if triggered)
+      # ---------------------------
+      - name: 🤖 Retrain Model
+        run: |
+          python src/train.py
+
+      # ---------------------------
+      # 6️⃣ Upload reports as artifacts
+      # ---------------------------
+      - name: 📊 Upload drift and metrics reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: reports
+          path: |
+            reports/
+            models/
+            data/processed/train.csv
+
+      # ---------------------------
+      # 7️⃣ Commit & Push Changes
+      # ---------------------------
+      - name: 🚀 Push updated model and reports
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name "mlops-bot"
+          git config user.email "mlops-bot@users.noreply.github.com"
+          git add -A
+          git commit -m "🤖 Auto retrain & drift update [skip ci]" || echo "No changes to commit"
+          git push origin main || echo "Push skipped"

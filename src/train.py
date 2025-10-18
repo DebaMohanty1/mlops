@@ -1,21 +1,56 @@
+# ============================================================
+# 🚀 Train & Register Model (with MLflow + GitHub Auto Push)
+# ============================================================
+
 import os
 import json
 import joblib
 import pandas as pd
+import mlflow
+import mlflow.sklearn
+from dotenv import load_dotenv
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, f1_score, classification_report
 from imblearn.over_sampling import SMOTE
+import subprocess
+from datetime import datetime
 
 # ------------------------------------------------------------
 # 📂 Paths
+# ------------------------------------------------------------
 DATA_PATH = "data/processed/train.csv"
 MODEL_PATH = "models/model.pkl"
 METRICS_PATH = "reports/metrics.json"
-# ------------------------------------------------------------
+DRIFT_LOG = "reports/drift_log.json"
 
 # ------------------------------------------------------------
-# 🧩 Load processed or merged data
+# 🔧 Helper: GitHub Auto Push
+# ------------------------------------------------------------
+def auto_push_to_github(message="Auto update after retrain"):
+    load_dotenv()
+    user = os.getenv("GITHUB_USER")
+    token = os.getenv("GITHUB_TOKEN")
+    repo = os.getenv("GITHUB_REPO")
+
+    if not all([user, token, repo]):
+        print("⚠️ Missing GitHub credentials in .env — skipping push.")
+        return
+
+    try:
+        remote_url = f"https://{user}:{token}@github.com/{user}/{repo}.git"
+        subprocess.run(["git", "config", "user.name", user], check=False)
+        subprocess.run(["git", "config", "user.email", f"{user}@users.noreply.github.com"], check=False)
+        subprocess.run(["git", "remote", "set-url", "origin", remote_url], check=False)
+        subprocess.run(["git", "add", "-A"], check=False)
+        subprocess.run(["git", "commit", "-m", message], check=False)
+        subprocess.run(["git", "push", "origin", "main"], check=False)
+        print("🚀 Auto-pushed latest artifacts to GitHub.")
+    except Exception as e:
+        print(f"❌ GitHub push failed: {e}")
+
+# ------------------------------------------------------------
+# 🧩 Data Load & Split
 # ------------------------------------------------------------
 def load_data(path):
     if not os.path.exists(path):
@@ -24,21 +59,14 @@ def load_data(path):
     print(f"✅ Loaded processed data: {df.shape}")
     return df
 
-# ------------------------------------------------------------
-# ✂️ Split into train/test
-# ------------------------------------------------------------
 def split_data(df):
     X = df.drop(columns=["Downtime"], errors="ignore")
     X = X.select_dtypes(include=["number"])
     y = df["Downtime"]
-
-    X_train, X_test, y_train, y_test = train_test_split(
-        X, y, test_size=0.2, random_state=42, stratify=y
-    )
-    return X_train, X_test, y_train, y_test
+    return train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
 
 # ------------------------------------------------------------
-# ⚖️ Balance data using SMOTE
+# ⚖️ Balance + Train + Evaluate
 # ------------------------------------------------------------
 def balance_data(X_train, y_train):
     smote = SMOTE(random_state=42)
@@ -46,9 +74,6 @@ def balance_data(X_train, y_train):
     print(f"⚖️ After SMOTE: {dict(pd.Series(y_res).value_counts())}")
     return X_res, y_res
 
-# ------------------------------------------------------------
-# 🌲 Train model
-# ------------------------------------------------------------
 def train_model(X_train, y_train):
     model = RandomForestClassifier(
         n_estimators=200, random_state=42, class_weight="balanced"
@@ -56,9 +81,6 @@ def train_model(X_train, y_train):
     model.fit(X_train, y_train)
     return model
 
-# ------------------------------------------------------------
-# 📊 Evaluate model
-# ------------------------------------------------------------
 def evaluate_model(model, X_test, y_test):
     y_pred = model.predict(X_test)
     acc = accuracy_score(y_test, y_pred)
@@ -70,7 +92,7 @@ def evaluate_model(model, X_test, y_test):
     return {"accuracy": acc, "f1_score": f1}
 
 # ------------------------------------------------------------
-# 💾 Save model and metrics
+# 💾 Save + MLflow Log + GitHub Push
 # ------------------------------------------------------------
 def save_artifacts(model, metrics):
     os.makedirs("models", exist_ok=True)
@@ -83,104 +105,67 @@ def save_artifacts(model, metrics):
         json.dump(metrics, f, indent=4)
     print(f"📈 Metrics saved → {METRICS_PATH}")
 
-# ------------------------------------------------------------
-# 🪄 Promote dataset as new baseline
-# ------------------------------------------------------------
-def update_baseline(df, baseline_path="data/processed/train.csv", drift_score=None):
-    os.makedirs(os.path.dirname(baseline_path), exist_ok=True)
-    df.to_csv(baseline_path, index=False)
-    print(f"🆕 Baseline updated → {baseline_path}")
-
-    log_entry = {
-        "timestamp": pd.Timestamp.now().isoformat(),
-        "new_baseline_path": baseline_path,
+def update_drift_log(df, drift_score):
+    os.makedirs("reports", exist_ok=True)
+    entry = {
+        "timestamp": datetime.now().isoformat(),
         "rows": len(df),
         "columns": list(df.columns),
         "drift_score": drift_score,
     }
 
-    drift_log_path = "reports/drift_log.json"
-    os.makedirs(os.path.dirname(drift_log_path), exist_ok=True)
-    if os.path.exists(drift_log_path):
-        with open(drift_log_path, "r") as f:
-            drift_log = json.load(f)
-    else:
-        drift_log = []
+    log = []
+    if os.path.exists(DRIFT_LOG):
+        with open(DRIFT_LOG, "r") as f:
+            log = json.load(f)
+    log.append(entry)
 
-    drift_log.append(log_entry)
-    with open(drift_log_path, "w") as f:
-        json.dump(drift_log, f, indent=4)
+    with open(DRIFT_LOG, "w") as f:
+        json.dump(log, f, indent=4)
 
-    print(f"🪄 Drift baseline promoted and logged → {drift_log_path}")
+    print(f"🪄 Drift log updated → {DRIFT_LOG}")
 
 # ------------------------------------------------------------
-# 📦 Load live drifted data
-# ------------------------------------------------------------
-def load_live_data(live_dir="data/live"):
-    live_dfs = []
-    if os.path.exists(live_dir):
-        for f in os.listdir(live_dir):
-            if f.startswith("current_") and f.endswith(".csv"):
-                path = os.path.join(live_dir, f)
-                try:
-                    df_live = pd.read_csv(path)
-                    live_dfs.append(df_live)
-                    print(f"📦 Included drifted dataset: {f} ({df_live.shape})")
-                except Exception as e:
-                    print(f"⚠️ Skipping {f} — error: {e}")
-    return live_dfs
-
-# ------------------------------------------------------------
-# 🚀 Main Training Logic (with NaN fix)
+# 🚀 Main Training Routine
 # ------------------------------------------------------------
 def main():
-    # 1️⃣ Load baseline
+    load_dotenv()
+
+    # 1️⃣ Load & Clean
     df = load_data(DATA_PATH)
+    if "Downtime" not in df.columns:
+        raise ValueError("❌ Missing 'Downtime' column in dataset.")
 
-    # 2️⃣ Merge drifted datasets if present
-    live_dfs = load_live_data()
-    if live_dfs:
-        print(f"🧠 Loaded {len(live_dfs)} drifted datasets (for analysis only).")
-    else:
-        print("✅ No drifted data to merge.")
+    df["Downtime"] = pd.to_numeric(df["Downtime"], errors="coerce")
+    df = df.dropna(subset=["Downtime"])
+    df["Downtime"] = df["Downtime"].astype(int)
 
-
-    # 3️⃣ Clean up and ensure numeric safety
-    if "Downtime" in df.columns:
-        df["Downtime"] = pd.to_numeric(df["Downtime"], errors="coerce")
-        before = len(df)
-        df = df.dropna(subset=["Downtime"])
-        after = len(df)
-        print(f"🧹 Dropped {before - after} unlabeled rows (no Downtime).")
-        df["Downtime"] = df["Downtime"].astype(int)
-    else:
-        raise ValueError("❌ 'Downtime' target column missing after merge!")
-
-    # 4️⃣ Handle NaNs before SMOTE
     num_cols = df.select_dtypes(include=["number"]).columns
     df[num_cols] = df[num_cols].fillna(df[num_cols].median())
 
-    if df[num_cols].isna().sum().any():
-        print("⚠️ Warning: Some NaNs remain even after imputation.")
-    else:
-        print("✅ No NaNs found after imputation.")
-
-    # 5️⃣ Split + train
+    # 2️⃣ Split + Train
     X_train, X_test, y_train, y_test = split_data(df)
-    X_train_res, y_train_res = balance_data(X_train, y_train)
-    model = train_model(X_train_res, y_train_res)
-
-    # 6️⃣ Evaluate and save
+    X_res, y_res = balance_data(X_train, y_train)
+    model = train_model(X_res, y_res)
     metrics = evaluate_model(model, X_test, y_test)
     save_artifacts(model, metrics)
 
-    # 7️⃣ Update baseline reference
-    try:
-        update_baseline(df, drift_score=metrics.get("f1_score"))
-    except Exception as e:
-        print(f"⚠️ Baseline update failed: {e}")
+    # 3️⃣ 🔬 MLflow Tracking + Registry
+    mlflow.set_tracking_uri("file:./mlruns")
+    mlflow.set_experiment("machine_downtime_monitoring")
 
-    print("✅ Training complete (drift-aware retraining done) and baseline refreshed!")
+    with mlflow.start_run(run_name=f"retrain_{datetime.now().strftime('%Y%m%d_%H%M%S')}"):
+        mlflow.log_params({"model_type": "RandomForest", "n_estimators": 200})
+        mlflow.log_metrics(metrics)
+        mlflow.sklearn.log_model(model, "model", registered_model_name="MachineDowntimeModel")
+
+    print("📦 Model registered in MLflow → MachineDowntimeModel")
+
+    # 4️⃣ Update Drift Log + Push
+    update_drift_log(df, metrics.get("f1_score"))
+    auto_push_to_github("Auto: retrained model + updated metrics + drift log")
+
+    print("\n✅ Retraining complete! Model, metrics, and drift logs updated.")
 
 # ------------------------------------------------------------
 if __name__ == "__main__":
