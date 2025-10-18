@@ -1,0 +1,36 @@
+stages:
+  preprocess:
+    cmd: python src/preprocess.py
+    deps:
+      - src/preprocess.py
+      - data/raw/Machine_downtime.csv
+    outs:
+      - data/processed/train.csv
+
+  train:
+    cmd: python src/train.py
+    deps:
+      - src/train.py
+      - data/processed/train.csv
+    outs:
+      - models/model.pkl
+      - models/metrics.json
+
+  evaluate:
+    cmd: python src/evaluate.py
+    deps:
+      - src/evaluate.py
+      - models/model.pkl
+      - data/processed/train.csv
+    outs:
+      - models/metrics.json
+
+  detect_drift:
+    cmd: python src/detect_drift.py
+    deps:
+      - src/detect_drift.py
+      - data/processed/train.csv
+      - data/live/current_high.csv
+    outs:
+      - reports/drift_report_high.html
+      - drift_history.json

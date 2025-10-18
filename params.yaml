@@ -1,0 +1,19 @@
+preprocess:
+  input_file: data/raw/Machine_downtime.csv
+  output_file: data/processed/train.csv
+
+train:
+  model_type: RandomForestClassifier
+  test_size: 0.2
+  random_state: 42
+  smote: true
+  n_estimators: 100
+  max_depth: 10
+
+evaluate:
+  metrics_output: models/metrics.json
+
+detect_drift:
+  threshold: 0.5
+  reference_path: data/processed/train.csv
+  live_dir: data/live

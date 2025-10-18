@@ -1,0 +1,14 @@
+# Core
+pandas>=2.0
+numpy>=1.26
+scikit-learn>=1.4
+imblearn>=0.0
+matplotlib>=3.8
+seaborn>=0.13
+
+# MLOps
+dvc>=3.48
+evidently>=0.7.15
+
+# Optional
+joblib
