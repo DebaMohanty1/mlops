@@ -1,4 +1,6 @@
-# Python
+# ==========================================
+# 🧠 Python / Environment
+# ==========================================
 __pycache__/
 *.pyc
 *.pyo
@@ -8,14 +10,43 @@ __pycache__/
 *.egg-info/
 .env
 .venv/
+.ipynb_checkpoints/
 
-# Data & Models
-data/processed/
-data/live/*.csv
-models/*.pkl
-reports/*.html
-reports/*.json
+# ==========================================
+# 📦 Data, Models, and Reports (handled by DVC)
+# Keep .dvc pointer files so Git knows what to track
+# ==========================================
+data/processed/*
+!data/processed/.gitignore
+!data/processed/*.dvc
 
-# DVC
+data/live/*
+!data/live/.gitignore
+!data/live/*.dvc
+
+models/*
+!models/.gitignore
+!models/*.dvc
+
+reports/*
+!reports/.gitignore
+!reports/*.dvc
+
+# ==========================================
+# ⚙️ DVC internals (local cache/temp only)
+# ==========================================
 .dvc/cache/
 .dvc/tmp/
+
+# ==========================================
+# 📊 MLflow artifacts (local only)
+# ==========================================
+mlruns/
+mlflow.db
+
+# ==========================================
+# 🧪 Misc / Project-specific
+# ==========================================
+*.bak
+*.tmp
+logs.txt
