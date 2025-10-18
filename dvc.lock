@@ -1,0 +1,70 @@
+schema: '2.0'
+stages:
+  preprocess:
+    cmd: python src/preprocess.py
+    deps:
+    - path: data/raw/Machine_downtime.csv
+      hash: md5
+      md5: d145b7eb04df19b470da495fb0ed21a7
+      size: 471770
+    - path: src/preprocess.py
+      hash: md5
+      md5: 5e4198b0f87ee55aa7920b22d8d2af29
+      size: 3457
+    outs:
+    - path: data/processed/train.csv
+      hash: md5
+      md5: 6f6e770e185c9abd7893de0b7707e8c1
+      size: 1832713
+  train:
+    cmd: python src/train.py
+    deps:
+    - path: data/processed/train.csv
+      hash: md5
+      md5: 0b5c98005c5f1dd26e50a19f293b45c1
+      size: 1821814
+    - path: src/train.py
+      hash: md5
+      md5: 4427feceb2199e554e1fe1cbf0e5893a
+      size: 7086
+    outs:
+    - path: models/model.pkl
+      hash: md5
+      md5: a45ed52235802e97c24f72d660bb2e1a
+      size: 312697
+    - path: reports/metrics.json
+      hash: md5
+      md5: 21a53db6ef3126cb0cf50be696671e76
+      size: 47
+  detect_drift:
+    cmd: python src/detect_drift.py
+    deps:
+    - path: data/live/current_high.csv
+      hash: md5
+      md5: d7028b4519984f862caf8b9afbcccb75
+      size: 601634
+    - path: data/live/current_low.csv
+      hash: md5
+      md5: 428c321859a8ef7e60ed9f671b8333d0
+      size: 516356
+    - path: data/live/current_mid.csv
+      hash: md5
+      md5: 441746b96f331127c8561e4305be7f5e
+      size: 564124
+    - path: data/processed/train.csv
+      hash: md5
+      md5: 532f1bf357e5aababa135d58037a1707
+      size: 599820
+    - path: src/detect_drift.py
+      hash: md5
+      md5: fb458baa941cfdc841184a644a44c360
+      size: 5335
+    outs:
+    - path: reports/drift_history.json
+      hash: md5
+      md5: 5f39a837aa5832a27908f134d5c77eb6
+      size: 650
+    - path: reports/drift_report_high.html
+      hash: md5
+      md5: f58dcc01ed1ea00aae9457dbc6e22c5a
+      size: 4561335

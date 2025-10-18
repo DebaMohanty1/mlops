@@ -1,1 +1,90 @@
 [05:01:39] ✅ No significant drift (0.00).
+[06:25:42] ✅ No significant drift for high (0.08).
+[06:25:43] ✅ No significant drift for low (0.00).
+[06:25:44] ✅ No significant drift for mid (0.00).
+[06:33:53] ✅ No significant drift for high (0.46).
+[06:33:53] ✅ No significant drift for low (0.00).
+[06:33:54] ✅ No significant drift for mid (0.23).
+[06:36:48] ✅ No significant drift for high (0.46).
+[06:36:49] ✅ No significant drift for low (0.00).
+[06:36:50] ✅ No significant drift for mid (0.23).
+[06:41:29] ✅ No significant drift for high (0.46).
+[06:41:30] ✅ No significant drift for low (0.00).
+[06:41:33] ✅ No significant drift for mid (0.23).
+[06:44:56] ⚠️ Drift detected for high (0.46) → Triggering DVC retraining...
+[06:44:57] ✅ Retraining complete for high. Model updated.
+[06:44:58] ✅ No significant drift for low (0.00).
+[06:45:01] ✅ No significant drift for mid (0.23).
+[06:48:17] 🔴 High (Retrain): Drift 0.46 → triggering DVC retraining...
+[06:48:18] ✅ Retraining complete for high. Model updated.
+[06:48:19] 🟢 Low (Stable): Drift 0.00 — no action needed.
+[06:48:22] 🟡 Moderate (Monitor): Drift 0.23 → monitor for trend.
+[07:00:56] 🔴 High (Retrain): Drift 0.46 → triggering DVC retraining...
+[07:00:59] ✅ Retraining complete for high. Model updated.
+[07:01:00] 🟢 Low (Stable): Drift 0.00 — no action needed.
+[07:01:03] 🟡 Moderate (Monitor): Drift 0.23 → monitor for trend.
+[07:04:28] 🔴 High (Retrain): Drift 0.46 → triggering DVC retraining...
+[07:04:29] ✅ Retraining complete for high. Model updated.
+[07:04:30] 🟢 Low (Stable): Drift 0.00 — no action needed.
+[07:04:33] 🟡 Moderate (Monitor): Drift 0.23 → monitor for trend.
+[07:05:04] 🔴 High (Retrain): Drift 0.46 → triggering DVC retraining...
+[07:05:07] ✅ Retraining complete for high. Model updated.
+[07:05:08] 🟢 Low (Stable): Drift 0.00 — no action needed.
+[07:05:11] 🟡 Moderate (Monitor): Drift 0.23 → monitor for trend.
+[07:18:22] 🟢 Low (Stable): Drift 0.00 — no action needed.
+[07:18:25] 🟡 Moderate (Monitor): Drift 0.23 → monitor for trend.
+[07:18:29] 🔴 High (Retrain): Drift 0.46 → triggering DVC retraining...
+[07:18:32] ✅ Retraining complete for high. Model updated.
+[07:18:32] 🆕 Baseline updated → data/processed/train.csv
+[07:22:40] 🔴 High (Retrain): Drift 0.46 → triggering DVC retraining...
+[07:22:41] ✅ Retraining complete for low. Model updated.
+[07:22:41] 🆕 Baseline updated → data/processed/train.csv
+[07:23:24] 🟢 Low (Stable): Drift 0.00 — no action needed.
+[07:23:29] 🟡 Moderate (Monitor): Drift 0.15 → monitor for trend.
+[07:23:33] 🔴 High (Retrain): Drift 0.46 → triggering DVC retraining...
+[07:23:35] ✅ Retraining complete for high. Model updated.
+[07:23:35] 🆕 Baseline updated → data/processed/train.csv
+[07:28:20] 🔴 High (Retrain): Drift 0.46 → triggering DVC retraining...
+[07:28:21] ✅ Retraining complete for low. Model updated.
+[07:28:21] 🆕 Baseline updated → data/processed/train.csv (drift now reset)
+[07:28:38] 🟢 Low (Stable): Drift 0.00 — no action needed.
+[07:28:43] 🟡 Moderate (Monitor): Drift 0.15 → monitor for trend.
+[07:28:48] 🔴 High (Retrain): Drift 0.46 → triggering DVC retraining...
+[07:28:49] ✅ Retraining complete for high. Model updated.
+[07:28:49] 🆕 Baseline updated → data/processed/train.csv (drift now reset)
+[13:04:55] 🟢 Low (Stable): Drift 0.00 — no action needed.
+[13:04:58] 🟡 Moderate (Monitor): Drift 0.23 → monitor for trend.
+[13:05:03] 🔴 High (Retrain): Drift 0.46 → triggering DVC retraining...
+[13:05:04] ✅ Retraining complete for high. Model updated.
+[13:05:04] 🆕 Baseline updated → data/processed/train.csv (drift now reset)
+[13:20:30] 🟢 Low (Stable): Drift 0.00 — no action needed.
+[13:20:33] 🟡 Moderate (Monitor): Drift 0.23 → monitor for trend.
+[13:20:36] 🔴 High (Retrain): Drift 0.46 → triggering DVC retraining...
+[13:20:36] ✅ Retraining complete for high. Model updated.
+[13:20:36] 🆕 Baseline updated → data/processed/train.csv (drift now reset)
+[13:23:03] 🟢 Low (Stable): Drift 0.00 — no action needed.
+[13:23:07] 🟡 Moderate (Monitor): Drift 0.23 → monitor for trend.
+[13:23:10] 🔴 High (Retrain): Drift 0.46 → triggering DVC retraining...
+[13:23:10] ✅ Retraining complete for high. Model updated.
+[13:23:10] 🆕 Baseline updated → data/processed/train.csv (drift now reset)
+[13:30:47] 🟢 Low (Stable): Drift 0.00 — no action needed.
+[13:30:50] 🟡 Moderate (Monitor): Drift 0.23 → monitor for trend.
+[13:30:55] 🔴 High (Retrain): Drift 0.46 → triggering DVC retraining...
+[13:30:55] ✅ Retraining complete for high. Model updated.
+[13:30:55] 🆕 Baseline updated → data/processed/train.csv (drift now reset)
+[13:38:02] 🟢 Low (Stable): Drift 0.00 — no action needed.
+[13:38:05] 🟡 Moderate (Monitor): Drift 0.23 → monitor for trend.
+[13:38:10] 🔴 High (Retrain): Drift 0.46 → triggering DVC retraining...
+[13:38:11] ✅ Retraining complete for high. Model updated.
+[13:38:11] 🆕 Baseline updated → data/processed/train.csv (drift now reset)
+[03:02:16] 🔴 High (Retrain): 0.61 → triggering retraining...
+[03:02:24] ✅ Retraining complete for batch_1. Model updated.
+[03:02:24] 🆕 Baseline updated → data/processed/train.csv
+[04:18:44] 🔴 High (Retrain): 0.31 → triggering retraining...
+[04:18:48] ✅ Retraining complete for batch_1. Model updated.
+[04:18:48] 🆕 Baseline updated → data/processed/train.csv
+[04:18:57] 🟢 Low (Stable): 0.00 — no action needed.
+[04:19:01] 🟡 Moderate (Monitor): 0.23 → monitor for trend.
+[04:19:04] 🔴 High (Retrain): 0.77 → triggering retraining...
+[04:19:08] ✅ Retraining complete for batch_3. Model updated.
+[04:19:09] 🆕 Baseline updated → data/processed/train.csv

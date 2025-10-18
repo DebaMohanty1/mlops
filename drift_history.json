@@ -1,8 +1,204 @@
 [
     {
-        "timestamp": "2025-10-18 05:01:39",
+        "timestamp": "2025-10-18 07:04:28",
+        "dataset": "high",
+        "drift_share": 0.462,
+        "drifted_columns": 6,
+        "total_columns": 16
+    },
+    {
+        "timestamp": "2025-10-18 07:04:30",
+        "dataset": "low",
         "drift_share": 0.0,
-        "drifted_columns": 0.0,
+        "drifted_columns": 0,
+        "total_columns": 16
+    },
+    {
+        "timestamp": "2025-10-18 07:04:33",
+        "dataset": "mid",
+        "drift_share": 0.231,
+        "drifted_columns": 3,
+        "total_columns": 16
+    },
+    {
+        "timestamp": "2025-10-18 07:05:04",
+        "dataset": "high",
+        "drift_share": 0.462,
+        "drifted_columns": 6,
+        "total_columns": 16
+    },
+    {
+        "timestamp": "2025-10-18 07:05:08",
+        "dataset": "low",
+        "drift_share": 0.0,
+        "drifted_columns": 0,
+        "total_columns": 16
+    },
+    {
+        "timestamp": "2025-10-18 07:05:11",
+        "dataset": "mid",
+        "drift_share": 0.231,
+        "drifted_columns": 3,
+        "total_columns": 16
+    },
+    {
+        "timestamp": "2025-10-18 07:18:21",
+        "dataset": "low",
+        "drift_share": 0.0,
+        "drifted_columns": 0,
+        "total_columns": 16
+    },
+    {
+        "timestamp": "2025-10-18 07:18:25",
+        "dataset": "mid",
+        "drift_share": 0.231,
+        "drifted_columns": 3,
+        "total_columns": 16
+    },
+    {
+        "timestamp": "2025-10-18 07:18:29",
+        "dataset": "high",
+        "drift_share": 0.462,
+        "drifted_columns": 6,
+        "total_columns": 16
+    },
+    {
+        "timestamp": "2025-10-18 07:22:40",
+        "dataset": "low",
+        "drift_share": 0.462,
+        "drifted_columns": 6,
+        "total_columns": 15
+    },
+    {
+        "timestamp": "2025-10-18 07:23:24",
+        "dataset": "low",
+        "drift_share": 0.0,
+        "drifted_columns": 0,
+        "total_columns": 15
+    },
+    {
+        "timestamp": "2025-10-18 07:23:29",
+        "dataset": "mid",
+        "drift_share": 0.154,
+        "drifted_columns": 2,
+        "total_columns": 15
+    },
+    {
+        "timestamp": "2025-10-18 07:23:33",
+        "dataset": "high",
+        "drift_share": 0.462,
+        "drifted_columns": 6,
+        "total_columns": 15
+    },
+    {
+        "timestamp": "2025-10-18 07:28:20",
+        "dataset": "low",
+        "drift_share": 0.462,
+        "drifted_columns": 6,
+        "total_columns": 15
+    },
+    {
+        "timestamp": "2025-10-18 07:28:38",
+        "dataset": "low",
+        "drift_share": 0.0,
+        "drifted_columns": 0,
+        "total_columns": 15
+    },
+    {
+        "timestamp": "2025-10-18 07:28:43",
+        "dataset": "mid",
+        "drift_share": 0.154,
+        "drifted_columns": 2,
+        "total_columns": 15
+    },
+    {
+        "timestamp": "2025-10-18 07:28:48",
+        "dataset": "high",
+        "drift_share": 0.462,
+        "drifted_columns": 6,
+        "total_columns": 15
+    },
+    {
+        "run_id": "20251018_130455",
+        "timestamp": "2025-10-18 13:04:55",
+        "dataset": "low",
+        "drift_share": 0.0,
+        "drifted_columns": 0,
+        "total_columns": 16
+    },
+    {
+        "run_id": "20251018_130458",
+        "timestamp": "2025-10-18 13:04:58",
+        "dataset": "mid",
+        "drift_share": 0.231,
+        "drifted_columns": 3,
+        "total_columns": 16
+    },
+    {
+        "run_id": "20251018_130503",
+        "timestamp": "2025-10-18 13:05:03",
+        "dataset": "high",
+        "drift_share": 0.462,
+        "drifted_columns": 6,
+        "total_columns": 16
+    },
+    {
+        "run_id": "20251018_132030",
+        "timestamp": "2025-10-18 13:20:30",
+        "dataset": "low",
+        "drift_share": 0.0,
+        "drifted_columns": 0,
+        "total_columns": 16
+    },
+    {
+        "run_id": "20251018_132033",
+        "timestamp": "2025-10-18 13:20:33",
+        "dataset": "mid",
+        "drift_share": 0.231,
+        "drifted_columns": 3,
+        "total_columns": 16
+    },
+    {
+        "run_id": "20251018_132036",
+        "timestamp": "2025-10-18 13:20:36",
+        "dataset": "high",
+        "drift_share": 0.462,
+        "drifted_columns": 6,
+        "total_columns": 16
+    },
+    {
+        "timestamp": "2025-10-19 03:02:16",
+        "dataset": "batch_1",
+        "drift_share": 0.615,
+        "drifted_columns": 8,
+        "total_columns": 16
+    },
+    {
+        "timestamp": "2025-10-19 04:18:44",
+        "dataset": "batch_1",
+        "drift_share": 0.308,
+        "drifted_columns": 4,
+        "total_columns": 16
+    },
+    {
+        "timestamp": "2025-10-19 04:18:57",
+        "dataset": "batch_1",
+        "drift_share": 0.0,
+        "drifted_columns": 0,
+        "total_columns": 16
+    },
+    {
+        "timestamp": "2025-10-19 04:19:01",
+        "dataset": "batch_2",
+        "drift_share": 0.231,
+        "drifted_columns": 3,
+        "total_columns": 16
+    },
+    {
+        "timestamp": "2025-10-19 04:19:04",
+        "dataset": "batch_3",
+        "drift_share": 0.769,
+        "drifted_columns": 10,
         "total_columns": 16
     }
 ]
