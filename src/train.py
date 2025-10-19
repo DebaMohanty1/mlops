@@ -133,6 +133,9 @@ def main():
 
     # 1️⃣ Load & Clean
     df = load_data(DATA_PATH)
+    if df.empty or len(df) == 0:
+        raise RuntimeError(f"{DATA_PATH} is empty. Aborting retrain to avoid invalid model.")
+
     if "Downtime" not in df.columns:
         raise ValueError("❌ Missing 'Downtime' column in dataset.")
 

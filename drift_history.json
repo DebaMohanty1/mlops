@@ -333,5 +333,12 @@
         "drift_share": 0.308,
         "drifted_columns": 4,
         "total_columns": 16
+    },
+    {
+        "timestamp": "2025-10-19 06:32:55",
+        "dataset": "batch_1",
+        "drift_share": 0.308,
+        "drifted_columns": 4,
+        "total_columns": 16
     }
 ]
