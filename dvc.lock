@@ -39,23 +39,32 @@ stages:
   detect_drift:
     cmd: python src/detect_drift.py
     deps:
-    - path: data/live/current_high.csv
+    - path: data/live/batch_1.csv
       hash: md5
-      md5: d7028b4519984f862caf8b9afbcccb75
-      size: 601634
-    - path: data/live/current_low.csv
+      md5: 6678cc618a66eb29e90289c5bd15f0b2
+      size: 1893427
+    - path: data/live/batch_2.csv
       hash: md5
-      md5: 428c321859a8ef7e60ed9f671b8333d0
-      size: 516356
-    - path: data/live/current_mid.csv
+      md5: 990ee74c247b38f5277e973e8a475592
+      size: 1893682
+    - path: data/live/batch_3.csv
       hash: md5
-      md5: 441746b96f331127c8561e4305be7f5e
-      size: 564124
+      md5: 257e929ea63942e41f114f079b1aaff4
+      size: 1891906
     - path: data/processed/train.csv
       hash: md5
       md5: 126d62d80bc7598451ac7d232846c026
       size: 1883084
     - path: src/detect_drift.py
       hash: md5
-      md5: 8b8a35050d7b7fe96420207d5b0c9c45
-      size: 6515
+      md5: 76425749ddbd21a284bf83cc052f4a99
+      size: 7283
+    outs:
+    - path: reports/drift_history.json
+      hash: md5
+      md5: 54f449490cc605915647b6fcaf79a633
+      size: 8502
+    - path: reports/drift_log.json
+      hash: md5
+      md5: ff7549b52173959467ea236ad7e3e349
+      size: 151

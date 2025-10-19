@@ -176,8 +176,11 @@ def main(source="file"):
             log_event(f"✅ Retraining complete for {batch}. Model updated.")
 
             # ✅ Promote current dataset as baseline
-            cur_df.to_csv(REF_PATH, index=False)
-            log_event(f"🆕 Baseline updated → {REF_PATH}")
+            tmp_path = REF_PATH + ".tmp"
+            cur_df.to_csv(tmp_path, index=False)
+            os.replace(tmp_path, REF_PATH)   # atomic replace avoids partial write
+            log_event(f"🆕 Baseline safely updated → {REF_PATH}")
+
             break
 
 
