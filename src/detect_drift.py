@@ -171,20 +171,35 @@ def main(source="file"):
             level = "🔴 High (Retrain)"
             log_event(f"{level}: {drift:.2f} → triggering retraining...")
 
-            # Trigger retraining
-            os.system("dvc repro train")
+            # ✅ Directly call training script to avoid recursive DVC locking
+            os.system(f"{os.getenv('PYTHON', 'python')} src/train.py")
             log_event(f"✅ Retraining complete for {batch}. Model updated.")
 
-            # Promote current dataset as baseline
+            # ✅ Promote current dataset as baseline
             cur_df.to_csv(REF_PATH, index=False)
             log_event(f"🆕 Baseline updated → {REF_PATH}")
             break
+
 
         # open report in browser
         webbrowser.open(f"file:///{os.path.abspath(REPORTS_DIR)}/drift_report_{batch}.html")
 
     print("\n✅ All drift checks complete.")
 
+    # ------------------------------------------------------
+    # Persist drift logs for DVC outs
+    os.makedirs(REPORTS_DIR, exist_ok=True)
+    drift_summary_path = os.path.join(REPORTS_DIR, "drift_log.json")
+    history_path = os.path.join(REPORTS_DIR, "drift_history.json")
+
+    # Write summaries so DVC outs always exist
+    with open(drift_summary_path, "w", encoding="utf-8") as f:
+        json.dump(summary, f, indent=4)
+    if os.path.exists(DRIFT_HISTORY):
+        with open(DRIFT_HISTORY, "r", encoding="utf-8") as src:
+            hist = json.load(src)
+        with open(history_path, "w", encoding="utf-8") as dst:
+            json.dump(hist, dst, indent=4)
 
 # ------------------------------------------------------
 if __name__ == "__main__":

@@ -21,12 +21,12 @@ stages:
     deps:
     - path: data/processed/train.csv
       hash: md5
-      md5: 0b5c98005c5f1dd26e50a19f293b45c1
-      size: 1821814
+      md5: 6f6e770e185c9abd7893de0b7707e8c1
+      size: 1832713
     - path: src/train.py
       hash: md5
-      md5: 4427feceb2199e554e1fe1cbf0e5893a
-      size: 7086
+      md5: 3860ab938192196f8124e53b6450fa7b
+      size: 6523
     outs:
     - path: models/model.pkl
       hash: md5
@@ -53,18 +53,9 @@ stages:
       size: 564124
     - path: data/processed/train.csv
       hash: md5
-      md5: 532f1bf357e5aababa135d58037a1707
-      size: 599820
+      md5: 126d62d80bc7598451ac7d232846c026
+      size: 1883084
     - path: src/detect_drift.py
       hash: md5
-      md5: fb458baa941cfdc841184a644a44c360
-      size: 5335
-    outs:
-    - path: reports/drift_history.json
-      hash: md5
-      md5: 5f39a837aa5832a27908f134d5c77eb6
-      size: 650
-    - path: reports/drift_report_high.html
-      hash: md5
-      md5: f58dcc01ed1ea00aae9457dbc6e22c5a
-      size: 4561335
+      md5: 8b8a35050d7b7fe96420207d5b0c9c45
+      size: 6515

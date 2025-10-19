@@ -12,12 +12,12 @@ stages:
     deps:
       - src/detect_drift.py
       - data/processed/train.csv
-      - data/live/current_low.csv
-      - data/live/current_mid.csv
-      - data/live/current_high.csv
+      - data/live/batch_1.csv
+      - data/live/batch_2.csv
+      - data/live/batch_3.csv
     outs:
-      - reports/drift_report_high.html
       - reports/drift_history.json
+      - reports/drift_log.json
 
   train:
     cmd: python src/train.py

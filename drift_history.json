@@ -235,5 +235,96 @@
         "drift_share": 0.769,
         "drifted_columns": 10,
         "total_columns": 16
+    },
+    {
+        "timestamp": "2025-10-19 05:02:24",
+        "dataset": "batch_1",
+        "drift_share": 0.692,
+        "drifted_columns": 9,
+        "total_columns": 16
+    },
+    {
+        "timestamp": "2025-10-19 05:06:39",
+        "dataset": "batch_1",
+        "drift_share": 0.308,
+        "drifted_columns": 4,
+        "total_columns": 16
+    },
+    {
+        "timestamp": "2025-10-19 05:07:08",
+        "dataset": "batch_1",
+        "drift_share": 0.308,
+        "drifted_columns": 4,
+        "total_columns": 16
+    },
+    {
+        "timestamp": "2025-10-19 05:07:27",
+        "dataset": "batch_1",
+        "drift_share": 0.308,
+        "drifted_columns": 4,
+        "total_columns": 16
+    },
+    {
+        "timestamp": "2025-10-19 05:09:17",
+        "dataset": "batch_1",
+        "drift_share": 0.308,
+        "drifted_columns": 4,
+        "total_columns": 16
+    },
+    {
+        "timestamp": "2025-10-19 06:07:16",
+        "dataset": "batch_1",
+        "drift_share": 0.308,
+        "drifted_columns": 4,
+        "total_columns": 16
+    },
+    {
+        "timestamp": "2025-10-19 06:07:43",
+        "dataset": "batch_1",
+        "drift_share": 0.308,
+        "drifted_columns": 4,
+        "total_columns": 16
+    },
+    {
+        "timestamp": "2025-10-19 06:08:16",
+        "dataset": "batch_1",
+        "drift_share": 0.308,
+        "drifted_columns": 4,
+        "total_columns": 16
+    },
+    {
+        "timestamp": "2025-10-19 06:10:05",
+        "dataset": "batch_1",
+        "drift_share": 0.308,
+        "drifted_columns": 4,
+        "total_columns": 16
+    },
+    {
+        "timestamp": "2025-10-19 06:13:16",
+        "dataset": "batch_1",
+        "drift_share": 0.308,
+        "drifted_columns": 4,
+        "total_columns": 16
+    },
+    {
+        "timestamp": "2025-10-19 06:13:44",
+        "dataset": "batch_1",
+        "drift_share": 0.308,
+        "drifted_columns": 4,
+        "total_columns": 16
+    },
+    {
+        "timestamp": "2025-10-19 06:14:12",
+        "dataset": "batch_1",
+        "drift_share": 0.308,
+        "drifted_columns": 4,
+        "total_columns": 16
+    },
+    {
+        "timestamp": "2025-10-19 06:19:19",
+        "dataset": "batch_1",
+        "drift_share": 0.308,
+        "drifted_columns": 4,
+        "total_columns": 16
     }
 ]
