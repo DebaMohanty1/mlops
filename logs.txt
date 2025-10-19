@@ -142,3 +142,6 @@
 [06:25:25] ✅ Retraining complete for batch_1. Model updated.
 [06:25:26] 🆕 Baseline safely updated → data/processed/train.csv
 [06:32:55] 🔴 High (Retrain): 0.31 → triggering retraining...
+[06:33:04] ✅ Retraining complete for batch_1. Model updated.
+[06:33:04] 🆕 Baseline safely updated → data/processed/train.csv
+[06:33:26] 🔴 High (Retrain): 0.31 → triggering retraining...
